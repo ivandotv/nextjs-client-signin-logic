@@ -1,0 +1,11 @@
+{
+  "extends": ["config:base"],
+  "rangeStrategy": "replace",
+  "semanticCommits": true,
+  "packageRules": [
+    {
+      "updateTypes": ["minor", "patch", "pin", "digest"],
+      "automerge": true
+    }
+  ]
+}
