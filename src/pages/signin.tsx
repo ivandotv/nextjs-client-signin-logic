@@ -3,7 +3,14 @@ import { useRouter } from "next/router"
 import React, { useEffect, useRef, useState } from "react"
 
 export default function SignIn() {
-  const { auth, initializing, getRedirect, clearRedirect, user } = useAuth()
+  const {
+    auth,
+    initializing,
+    getRedirect,
+    clearRedirect,
+    user,
+    error,
+  } = useAuth()
   const [email, setEmail] = useState<string>("admin@example.com")
   const [pswd, setPswd] = useState<string>("admin123")
   const [signInInProgress, setInProgress] = useState(false)
@@ -24,11 +31,9 @@ export default function SignIn() {
       if (user) {
         const redirect = getRedirect()
         if (redirect) {
-          console.log("use redirect ", redirect)
           router.push(redirect) // go to page which redirected to login
           clearRedirect()
         } else {
-          console.log("use default")
           router.push("/protected") // go to default protected page
         }
       }
@@ -74,6 +79,7 @@ export default function SignIn() {
               Email:
               <input type="email" value={email} onChange={handleEmail} />
             </label>
+            <br />
             <label>
               Password:
               <input
@@ -85,6 +91,12 @@ export default function SignIn() {
             </label>
             <input type="submit" required value="Submit" />
           </form>
+          {error ? (
+            <div>
+              <p>Sign in error:</p>
+              <p>{error.message}</p>
+            </div>
+          ) : null}
         </div>
       ) : null}
     </>

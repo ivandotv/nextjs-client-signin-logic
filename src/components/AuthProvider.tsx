@@ -10,6 +10,7 @@ export const AuthContext = React.createContext<
       auth: Auth
       initializing: boolean
       user: User | null
+      error: { message: string }
       setRedirect: (redirect: string) => void
       getRedirect: () => string | null
       clearRedirect: () => void
@@ -42,6 +43,7 @@ export function useAuth() {
 
 export function AuthProvider({ children }: { children: JSX.Element }) {
   const [user, setUser] = useState<User | null>(null)
+  const [error, setError] = useState<{ message: string } | null>(null)
   const [initializing, setInitializing] = useState(true)
 
   /*
@@ -49,12 +51,16 @@ export function AuthProvider({ children }: { children: JSX.Element }) {
     just a quick demo of resolving the initial user
   */
   useEffect(() => {
-    auth.resolveUser(2000).onAuthStateChanged((user: User) => {
+    auth.resolveUser(2000).onAuthStateChanged((user: User, error) => {
       console.log("auth state changed ", user)
       if (user) {
         setUser(user)
+        setError(null)
       } else {
         setUser(null)
+        if (error) {
+          setError(error)
+        }
       }
       setInitializing(false)
     })
@@ -62,6 +68,7 @@ export function AuthProvider({ children }: { children: JSX.Element }) {
 
   const value = {
     user,
+    error,
     auth,
     initializing,
     setRedirect,

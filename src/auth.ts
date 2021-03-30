@@ -1,11 +1,4 @@
-// let signleton: Auth
-
-// export function createAuth() {
-//   if (signleton) return signleton
-//   return new Auth()
-// }
-
-export type UserCB = (user: User) => void
+export type UserCB = (user: User, error: any) => void
 
 const userEmail = `admin@example.com`
 const userPassword = "admin123"
@@ -19,12 +12,11 @@ export type User = {
 export class Auth {
   user: User
 
-  error: { message: string; code: number } | null
+  error: { message: string } | null
 
   cb: UserCB
 
   constructor() {
-    console.log("auth constructor")
     this.user = null
     this.error = null
   }
@@ -37,8 +29,8 @@ export class Auth {
     }
   }
 
-  protected onUserChange(user: User | null) {
-    this.cb && this.cb(user)
+  protected onUserChange(user: User | null, error?: { message: string }) {
+    this.cb && this.cb(user, error)
   }
 
   signIn(email: string, password: string, delay = 2000) {
@@ -46,8 +38,14 @@ export class Auth {
 
     return new Promise((resolve, reject) => {
       if (email !== userEmail || password !== userPassword) {
-        reject({ message: "Wrong email or password" })
+        const error = { message: "Wrong email or password" }
+        this.error = error
+        reject(error)
+        this.onUserChange(null, this.error)
+
+        return
       }
+
       setTimeout(() => {
         this.user = {
           name: "Ivan",
