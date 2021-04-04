@@ -32,11 +32,13 @@ export default function MyApp(props: AppProps) {
         />
       </Head>
       <AuthProvider>
+        {/* if requireAuth property is present - protect the page */}
         {Component.requireAuth ? (
           <AuthGuard>
             <Component {...pageProps} />
           </AuthGuard>
         ) : (
+          // public page
           <Component {...pageProps} />
         )}
       </AuthProvider>
