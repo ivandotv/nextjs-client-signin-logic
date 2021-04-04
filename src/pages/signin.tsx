@@ -2,6 +2,9 @@ import { useAuth } from "components/AuthProvider"
 import { useRouter } from "next/router"
 import React, { useEffect, useRef, useState } from "react"
 
+const defaultEmail = "admin@example.com"
+const defaultPassword = "admin123"
+
 export default function SignIn() {
   const {
     auth,
@@ -11,8 +14,8 @@ export default function SignIn() {
     user,
     error,
   } = useAuth()
-  const [email, setEmail] = useState<string>("admin@example.com")
-  const [pswd, setPswd] = useState<string>("admin123")
+  const [email, setEmail] = useState<string>(defaultEmail)
+  const [pswd, setPswd] = useState<string>(defaultPassword)
   const [signInInProgress, setInProgress] = useState(false)
   const mounted = useRef<boolean>()
   const router = useRouter()
