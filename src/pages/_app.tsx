@@ -30,13 +30,6 @@ export default function MyApp(props: AppProps) {
           content="Next.js Client side sign in example"
           key="description"
         />
-        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-        <link
-          href="/favicon-32x32.png"
-          rel="icon"
-          type="image/png"
-          sizes="32x32"
-        />
       </Head>
       <AuthProvider>
         {Component.requireAuth ? (
