@@ -1,5 +1,6 @@
 import { useAuth } from "components/AuthProvider"
 import { PageLinks } from "components/PageLinks"
+import { UserStatus } from "components/UserStatus"
 
 export default function Home() {
   const { user } = useAuth()
@@ -7,19 +8,8 @@ export default function Home() {
   return (
     <div>
       <h1>Index</h1>
-      <p>All pages have access to user data.</p>
-      <p>
-        <strong>User status: {user ? "Signed in" : "Not signed in"}</strong>
-      </p>
-      <div>
-        {user ? (
-          <div>
-            <p>name: {user.name}</p>
-            <p>email: {user.email}</p>
-          </div>
-        ) : null}
-        <PageLinks />
-      </div>
+      <UserStatus />
+      <PageLinks />
     </div>
   )
 }

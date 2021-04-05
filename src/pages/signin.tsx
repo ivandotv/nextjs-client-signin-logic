@@ -1,4 +1,5 @@
 import { useAuth } from "components/AuthProvider"
+import { UserStatus } from "components/UserStatus"
 import { useRouter } from "next/router"
 import React, { useEffect, useRef, useState } from "react"
 
@@ -75,6 +76,8 @@ export default function SignIn() {
 
   return (
     <>
+      <h1>Sign In</h1>
+      <UserStatus />
       {!user ? ( // there is no user, show sign in form
         <div>
           <form onSubmit={handleSubmit}>
