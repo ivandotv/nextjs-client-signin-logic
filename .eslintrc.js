@@ -15,11 +15,11 @@ module.exports = {
   parserOptions: {
     sourceType: "module",
   },
-  // settings: {
-  //   react: {
-  //     version: "detect",
-  //   },
-  // },
+  settings: {
+    react: {
+      version: "detect",
+    },
+  },
   rules: {
     "react/prop-types": "off",
     "react/react-in-jsx-scope": "off",
