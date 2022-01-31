@@ -7,14 +7,8 @@ const defaultEmail = "admin@example.com"
 const defaultPassword = "admin123"
 
 export default function SignIn() {
-  const {
-    auth,
-    initializing,
-    getRedirect,
-    clearRedirect,
-    user,
-    error,
-  } = useAuth()
+  const { auth, initializing, getRedirect, clearRedirect, user, error } =
+    useAuth()
   const [email, setEmail] = useState<string>(defaultEmail)
   const [pswd, setPswd] = useState<string>(defaultPassword)
   const [signInInProgress, setInProgress] = useState(false)
