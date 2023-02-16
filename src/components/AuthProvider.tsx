@@ -52,7 +52,6 @@ export function AuthProvider({ children }: { children: JSX.Element }) {
   */
   useEffect(() => {
     auth.resolveUser(2000).onAuthStateChanged((user: User, error) => {
-      console.log("auth state changed ", user)
       if (user) {
         setUser(user)
         setError(null)

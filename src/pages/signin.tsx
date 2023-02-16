@@ -28,11 +28,12 @@ export default function SignIn() {
     if (!initializing) {
       if (user) {
         const redirect = getRedirect()
-        if (redirect) {
+        console.log("redirect: ", redirect)
+        if (redirect !== null) {
           router.push(redirect) // go to page which redirected to login
           clearRedirect()
         } else {
-          router.push("/protected") // go to default protected page
+          router.back() // go to previous page
         }
       }
     }
